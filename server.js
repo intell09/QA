@@ -4,7 +4,13 @@ const app = express()
 const {bots, playerRecord} = require('./data')
 const {shuffleArray} = require('./utils')
 
+
 app.use(express.json())
+
+app.use(express.static(path.join(__dirname, "./public")));
+app.use('/styles', express.static(path.join(__dirname, "./public/index.css")));
+app.use('/js', express.static(path.join(__dirname, "./public/index.js")));
+
 
 app.get('/api/robots', (req, res) => {
     try {
@@ -67,7 +73,7 @@ app.get('/api/player', (req, res) => {
     }
 })
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 4001
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)
